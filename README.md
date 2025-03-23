@@ -1,2 +1,2 @@
 # starter-template-vite-express-spa
-A generic e-commerce app with a Vite/React client and an Express server, housed in a single monorepo
+An application starter template with a Vite/React client and an Express server and a shared library for API TS types, housed in a yarn monorepo
