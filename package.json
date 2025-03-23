@@ -1,0 +1,14 @@
+{
+  "name": "starter-template-vite-express-spa",
+  "private": true,
+  "engines": {
+    "node": "22"
+  },
+  "description": "Starter Template For A React/Express SPA Application",
+  "repository": "git@github.com:arpepper139/starter-template-vite-express-spa.git",
+  "author": "https://github.com/arpepper139",
+  "license": "MIT",
+  "workspaces": [
+    "core/*"
+  ]
+}
