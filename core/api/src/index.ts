@@ -1,13 +1,15 @@
-import express from "express";
+import express, {Request, Response} from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+
+import type {ExampleApiResponse} from 'api-types';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins: string[] = ['http://localhost:5173'];
 
 // Enable CORS for all requests from allowed domains
 app.use(cors({
@@ -21,12 +23,13 @@ app.use(cors({
     credentials: true,
 }));
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 
-app.get("/api", (req, res) => {
-  res.send(JSON.stringify({'access': 'allowed'}));
+app.get("/api", (req: Request, res: Response<ExampleApiResponse>) => {
+  // res.status(500).json({error: 'Bad Request'});
+  res.json({'access': 'allowed'});
 });
 
 app.listen(port, () => {

@@ -24,6 +24,7 @@
     "@types/cors": "2.8.17",
     "@types/express": "5.0.1",
     "@types/node": "22.13.11",
+    "api-types": "workspace:*",
     "nodemon": "3.1.9",
     "typescript": "5.8.2"
   }

@@ -1,0 +1,14 @@
+{
+  "name": "api-types",
+  "version": "1.0.0",
+  "description": "Shared API TS Types",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "5.8.2"
+  }
+}

@@ -4,21 +4,18 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 import { apiFetch } from "./utilities/apiFetch";
-
-type Data = {
-  access: string;
-};
+import type { ExampleApiResponse } from "api-types";
 
 function App() {
   // const [count, setCount] = useState(0);
 
-  const [data, setData] = useState<Data | null>(null);
+  const [data, setData] = useState<ExampleApiResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await apiFetch<Data>("/api");
+        const result = await apiFetch<ExampleApiResponse>("/api");
         setData(result);
       } catch (err) {
         setError((err as Error).message);

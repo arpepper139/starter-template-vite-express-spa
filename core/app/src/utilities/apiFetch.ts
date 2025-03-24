@@ -53,7 +53,7 @@ export async function apiFetch<T>(endpoint: string, options: FetchOptions = {}):
             throw new Error(errorData.message || `Error ${response.status}`);
         }
 
-        return await response.json() as T;
+        return await response.json() satisfies T;
     } catch (error) {
         console.error(`API Fetch Error: ${(error as Error).message}`);
         throw error;
