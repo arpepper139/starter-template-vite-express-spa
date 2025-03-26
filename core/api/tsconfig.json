@@ -10,5 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist" // Specifies output directory for compiled files
   },
-  "include": ["src/**/*"] // Include all files under the src directory
+  "include": ["src/**/*"], // Include all files under the src directory
+  "exclude:": ["node_modules", "dist"]
 }
