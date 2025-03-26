@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await apiFetch<ExampleApiResponse>("/api");
+        const result = await apiFetch<ExampleApiResponse>("/api/test");
         setData(result);
       } catch (err) {
         setError((err as Error).message);
