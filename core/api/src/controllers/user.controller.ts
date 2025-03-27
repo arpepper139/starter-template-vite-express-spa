@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-// TO DO -- swap to DB implementation
-// import UserService from "../services/user.service.js";
-import UserService from "../services/user.mock.service.js";
+import UserService from "../services/user.service.js";
+// import UserService from "../services/user.mock.service.js";
 import User from "../models/user.model.js";
 
 // TO DO -- move this into shared API types
@@ -16,7 +15,7 @@ export const getUsers = async (req: Request, res: Response<User[] | ErrorMessage
     const users = await UserService.getAll();
     res.json(users);
   } catch (error) {
-    // TO DO -- create shared TS enum for status codes
+    // TO DO -- create shared API enum for status codes
     res.status(500).json({ message: "Error fetching users" });
   }
 };

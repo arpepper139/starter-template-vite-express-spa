@@ -26,14 +26,39 @@ class UserService {
     return new User(row.id, row.name, row.email, row.created_at, row.updated_at);
   }
 
-  // Update a user
-    // TO DO -- make this more flexible so only one piece can be updated
-  static async update(id: string, name: string, email: string): Promise<User | null> {
-    const result = await pool.query(
-      "UPDATE users SET name = $1, email = $2, updated_at = NOW() WHERE id = $3 RETURNING *",
-      [name, email, id]
-    );
+  // Update a user - flexible update for name, email, or both
+  static async update(id: string, name?: string, email?: string): Promise<User | null> {
+    if (!name && !email) {
+      throw new Error("At least one field (name or email) must be provided for update.");
+    }
+
+    // fields to SET
+    const fields: string[] = [];
+    // values inserted into the query
+    const values: unknown[] = [];
+
+    if (name) {
+      values.push(name); 
+      fields.push(`name = $${values.length}`);
+    }
+    if (email) {
+      values.push(email)
+      fields.push(`email = $${values.length}`);
+    }
+
+    // Always update `updated_at`
+    fields.push(`updated_at = NOW()`);
+
+    // Add `id` as the last parameter
+    values.push(id);
+
+    // Construct the final query
+    const query = `UPDATE users SET ${fields.join(", ")} WHERE id = $${values.length} RETURNING *`;
+
+    // Execute the query
+    const result = await pool.query(query, values);
     if (result.rows.length === 0) return null;
+
     const row = result.rows[0];
     return new User(row.id, row.name, row.email, row.created_at, row.updated_at);
   }
