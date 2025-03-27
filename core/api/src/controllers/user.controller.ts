@@ -15,6 +15,7 @@ export const getUsers = async (req: Request, res: Response<User[] | ErrorMessage
     const users = await UserService.getAll();
     res.json(users);
   } catch (error) {
+    // TO DO -- create shared API enum for status codes
     res.status(500).json({ message: "Error fetching users" });
   }
 };

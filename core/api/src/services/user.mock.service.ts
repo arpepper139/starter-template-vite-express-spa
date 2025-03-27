@@ -31,6 +31,10 @@ class UserService {
 
   // Update a user
   static async update(id: string, name?: string, email?: string): Promise<User | null> {
+    if (!name && !email) {
+      throw new Error("At least one field (name or email) must be provided for update.");
+    }
+    
     const user = USERS.find(user => user.id === id);
     if (!user) {
       return null;
