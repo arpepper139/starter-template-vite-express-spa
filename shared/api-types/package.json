@@ -4,6 +4,7 @@
   "description": "Shared API TS Types",
   "main": "dist/index.js",
   "license": "MIT",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "tsc"

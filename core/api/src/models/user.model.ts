@@ -1,10 +1,4 @@
-// TO DO -- move this interface type in the API Types to represent what gets returned, and implement it here.
-interface UserShape {
-  id: string;
-  name: string;
-  email: string;
-}
-
+import { UserShape } from "api-types";
 class User implements UserShape {
   id: string;
   name: string;
@@ -18,6 +12,15 @@ class User implements UserShape {
     this.email = email;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+  }
+
+  toAPIShape(): UserShape {
+    const {id, name, email} = this;
+    return {
+      id,
+      name,
+      email
+    }
   }
 }
 
