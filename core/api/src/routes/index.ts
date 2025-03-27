@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import testRoutes from "./test.routes.js";
 import userRoutes from "./user.routes.js";
 

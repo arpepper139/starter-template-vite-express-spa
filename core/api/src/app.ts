@@ -9,9 +9,11 @@ import {pool} from './config/db.js';
 const app = express();
 
 // Middleware setup
+
+//// Allows the server to parse incoming JSON
 app.use(express.json());
 
-// Enable CORS for all requests from allowed domains
+//// Enables CORS for all requests from allowed domains
 const allowedOrigins: string[] = ['http://localhost:5173'];
 app.use(cors({
     origin: (origin, callback) => {
@@ -24,13 +26,13 @@ app.use(cors({
     credentials: true,
 }));
 
-// // Global error handler
+// Global error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   res.status(500).json({ message: "Something went wrong!" });
 });
 
-// Start server and confirm DB connection
+// Starts server and confirm DB connection
 const startServer = async (req: Request, res: Response) => {
   try {
     await pool.query("SELECT 1"); // Quick test query
