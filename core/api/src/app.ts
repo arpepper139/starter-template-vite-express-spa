@@ -5,6 +5,7 @@ import express, {Request, Response, NextFunction} from "express";
 import cors from "cors";
 import router from "./routes/index.js"
 import {pool} from './config/db.js';
+import {HttpStatusCode} from "api-types";
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.use(cors({
 // Global error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
-  res.status(500).json({ message: "Something went wrong!" });
+  res.status(HttpStatusCode.InternalServerError).json({ message: "Something went wrong!" });
 });
 
 // Starts server and confirm DB connection

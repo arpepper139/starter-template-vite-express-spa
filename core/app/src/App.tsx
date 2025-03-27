@@ -4,18 +4,18 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 import { apiFetch } from "./utilities/apiFetch";
-import type { ExampleApiResponse } from "api-types";
+import { CustomMessage } from "api-types";
 
 function App() {
   // const [count, setCount] = useState(0);
 
-  const [data, setData] = useState<ExampleApiResponse | null>(null);
+  const [data, setData] = useState<CustomMessage | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const result = await apiFetch<ExampleApiResponse>("/api/test");
+        const result = await apiFetch<CustomMessage>("/api/test");
         setData(result);
       } catch (err) {
         setError((err as Error).message);
@@ -27,7 +27,7 @@ function App() {
 
   if (error) return <div>Error: {error}</div>;
   if (!data) return <div>Loading...</div>;
-  return <div>{JSON.stringify(data)}</div>;
+  return <div>{JSON.stringify({ data })}</div>;
 
   // return (
   //   <>

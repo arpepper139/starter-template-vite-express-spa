@@ -1,8 +1,11 @@
+import {UserServiceAbstract} from "./user.service.js"
 import User from "../models/user.model.js";
 
-const USERS: User[] = [{'id': '1', 'name': "Andrew", 'email': 'apa@gmail.com', createdAt: new Date(), updatedAt: new Date()}]
 
-class UserService {
+
+const USERS: User[] = [new User('1', 'Andrew', 'apa@gmail.com', new Date(), new Date())]
+
+class UserService extends UserServiceAbstract {
   // Fetch all users
   static async getAll(): Promise<User[]> {
     return await USERS
@@ -10,7 +13,6 @@ class UserService {
 
   // Fetch a user by ID
   static async getById(id: string): Promise<User | null> {
-    console.log('in get by id')
     const user = await USERS.find(user => user.id === id);
     if (!user) return null;
     return user;
@@ -18,13 +20,7 @@ class UserService {
 
   // Create a new user
   static async create(name: string, email: string): Promise<User> {
-    const newUser: User = {
-      id: `${USERS.length + 1}`,
-      name,
-      email,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
+    const newUser: User = new User(`${USERS.length + 1}`, name, email, new Date(), new Date());
     await USERS.push(newUser)
     return newUser;
   }
@@ -39,15 +35,12 @@ class UserService {
     if (!user) {
       return null;
     }
-    const updatedUser = {
-      ...user,
-      name: name ?? user.name,
-      email: email ?? user.email,
-      updatedAt: new Date()
-    }
-    const userIndex = USERS.indexOf(user)
+    const updatedName = name ?? user.name;
+    const updatedEmail = email ?? user.email;
+    const updatedUser = new User(id, updatedName, updatedEmail, user.createdAt, new Date());
+    const userIndex = USERS.indexOf(user);
 
-    await USERS.splice(userIndex, 1, updatedUser)
+    await USERS.splice(userIndex, 1, updatedUser);
     return updatedUser;
   }
 

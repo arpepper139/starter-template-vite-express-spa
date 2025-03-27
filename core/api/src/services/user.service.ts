@@ -1,7 +1,30 @@
 import {pool} from "../config/db.js";
 import User from "../models/user.model.js";
 
-class UserService {
+// Ensures consistent implementation across mock and actual Services
+export abstract class UserServiceAbstract {
+  static async create(name: string, email: string): Promise<User> {
+    throw new Error("Method 'create' not implemented.");
+  }
+
+  static async update(id: string, name?: string, email?: string): Promise<User | null> {
+    throw new Error("Method 'update' not implemented.");
+  }
+
+  static async getAll(): Promise<User[]> {
+    throw new Error("Method 'getById' not implemented.");
+  }
+
+  static async getById(id: string): Promise<User | null> {
+    throw new Error("Method 'getById' not implemented.");
+  }
+
+  static async delete(id: string): Promise<boolean> {
+    throw new Error("Method 'delete' not implemented.");
+  }
+}
+
+class UserService extends UserServiceAbstract {
   // Fetch all users
   static async getAll(): Promise<User[]> {
     const result = await pool.query("SELECT * FROM users ORDER BY created_at DESC");
