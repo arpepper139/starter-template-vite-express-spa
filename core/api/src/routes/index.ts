@@ -5,7 +5,7 @@ import userRoutes from "./user.routes.js";
 const router = Router();
 
 // e.g. /api/users
-router.use("/users", userRoutes); 
+router.use("/users", userRoutes);
 
 // e.g. /api/test
 router.use("/test", testRoutes);

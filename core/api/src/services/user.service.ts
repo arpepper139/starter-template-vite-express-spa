@@ -1,4 +1,4 @@
-import {pool} from "../config/db.js";
+import { pool } from "../config/db.js";
 import User from "../models/user.model.js";
 
 // Ensures consistent implementation across mock and actual Services
@@ -7,7 +7,11 @@ export abstract class UserServiceAbstract {
     throw new Error("Method 'create' not implemented.");
   }
 
-  static async update(id: string, name?: string, email?: string): Promise<User | null> {
+  static async update(
+    id: string,
+    name?: string,
+    email?: string
+  ): Promise<User | null> {
     throw new Error("Method 'update' not implemented.");
   }
 
@@ -27,8 +31,13 @@ export abstract class UserServiceAbstract {
 class UserService extends UserServiceAbstract {
   // Fetch all users
   static async getAll(): Promise<User[]> {
-    const result = await pool.query("SELECT * FROM users ORDER BY created_at DESC");
-    return result.rows.map((row) => new User(row.id, row.name, row.email, row.created_at, row.updated_at));
+    const result = await pool.query(
+      "SELECT * FROM users ORDER BY created_at DESC"
+    );
+    return result.rows.map(
+      (row) =>
+        new User(row.id, row.name, row.email, row.created_at, row.updated_at)
+    );
   }
 
   // Fetch a user by ID
@@ -36,7 +45,13 @@ class UserService extends UserServiceAbstract {
     const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
     if (result.rows.length === 0) return null;
     const row = result.rows[0];
-    return new User(row.id, row.name, row.email, row.created_at, row.updated_at);
+    return new User(
+      row.id,
+      row.name,
+      row.email,
+      row.created_at,
+      row.updated_at
+    );
   }
 
   // Create a new user
@@ -46,13 +61,25 @@ class UserService extends UserServiceAbstract {
       [name, email]
     );
     const row = result.rows[0];
-    return new User(row.id, row.name, row.email, row.created_at, row.updated_at);
+    return new User(
+      row.id,
+      row.name,
+      row.email,
+      row.created_at,
+      row.updated_at
+    );
   }
 
   // Update a user - flexible update for name, email, or both
-  static async update(id: string, name?: string, email?: string): Promise<User | null> {
+  static async update(
+    id: string,
+    name?: string,
+    email?: string
+  ): Promise<User | null> {
     if (!name && !email) {
-      throw new Error("At least one field (name or email) must be provided for update.");
+      throw new Error(
+        "At least one field (name or email) must be provided for update."
+      );
     }
 
     // fields to SET
@@ -61,11 +88,11 @@ class UserService extends UserServiceAbstract {
     const values: unknown[] = [];
 
     if (name) {
-      values.push(name); 
+      values.push(name);
       fields.push(`name = $${values.length}`);
     }
     if (email) {
-      values.push(email)
+      values.push(email);
       fields.push(`email = $${values.length}`);
     }
 
@@ -76,14 +103,22 @@ class UserService extends UserServiceAbstract {
     values.push(id);
 
     // Construct the final query
-    const query = `UPDATE users SET ${fields.join(", ")} WHERE id = $${values.length} RETURNING *`;
+    const query = `UPDATE users SET ${fields.join(", ")} WHERE id = $${
+      values.length
+    } RETURNING *`;
 
     // Execute the query
     const result = await pool.query(query, values);
     if (result.rows.length === 0) return null;
 
     const row = result.rows[0];
-    return new User(row.id, row.name, row.email, row.created_at, row.updated_at);
+    return new User(
+      row.id,
+      row.name,
+      row.email,
+      row.created_at,
+      row.updated_at
+    );
   }
 
   // Delete a user

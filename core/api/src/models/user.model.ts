@@ -6,7 +6,13 @@ class User implements UserShape {
   createdAt: Date;
   updatedAt: Date;
 
-  constructor(id: string, name: string, email: string, createdAt: Date, updatedAt: Date) {
+  constructor(
+    id: string,
+    name: string,
+    email: string,
+    createdAt: Date,
+    updatedAt: Date
+  ) {
     this.id = id;
     this.name = name;
     this.email = email;
@@ -15,12 +21,12 @@ class User implements UserShape {
   }
 
   toAPIShape(): UserShape {
-    const {id, name, email} = this;
+    const { id, name, email } = this;
     return {
       id,
       name,
-      email
-    }
+      email,
+    };
   }
 }
 
