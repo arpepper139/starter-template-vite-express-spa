@@ -1,9 +1,6 @@
-import {UserServiceAbstract} from "./user.service.js"
-import User from "../models/user.model.js";
-
-
-
-const USERS: User[] = [new User('1', 'Andrew', 'apa@gmail.com', new Date(), new Date())]
+import {UserServiceAbstract} from "../../services/user.service.js"
+import {USERS} from "../db.mock.js";
+import User from "../../models/user.model.js";
 
 class UserService extends UserServiceAbstract {
   // Fetch all users
