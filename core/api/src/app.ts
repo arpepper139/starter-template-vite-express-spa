@@ -1,11 +1,11 @@
 /**
  * Sets up middleware and route registration
  */
-import express, {Request, Response, NextFunction} from "express";
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
-import router from "./routes/index.js"
-import {pool} from './config/db.js';
-import {HttpStatusCode} from "api-types";
+import router from "./routes/index.js";
+import { pool } from "./config/db.js";
+import { HttpStatusCode } from "api-types";
 
 const app = express();
 
@@ -15,22 +15,26 @@ const app = express();
 app.use(express.json());
 
 //// Enables CORS for all requests from allowed domains
-const allowedOrigins: string[] = ['http://localhost:5173'];
-app.use(cors({
+const allowedOrigins: string[] = ["http://localhost:5173"];
+app.use(
+  cors({
     origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
     },
     credentials: true,
-}));
+  })
+);
 
 // Global error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
-  res.status(HttpStatusCode.InternalServerError).json({ message: "Something went wrong!" });
+  res
+    .status(HttpStatusCode.InternalServerError)
+    .json({ message: "Something went wrong!" });
 });
 
 // Starts server and confirm DB connection
@@ -48,6 +52,6 @@ const startServer = async (req: Request, res: Response) => {
 app.get("/", startServer);
 
 // Routes
-app.use("/api", router)
+app.use("/api", router);
 
 export default app;

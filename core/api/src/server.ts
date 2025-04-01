@@ -2,7 +2,7 @@
  * Entry point into the API server
  */
 import app from "./app.js";
-import {env} from "./config/env.js"
+import { env } from "./config/env.js";
 
 const PORT = env.PORT;
 
