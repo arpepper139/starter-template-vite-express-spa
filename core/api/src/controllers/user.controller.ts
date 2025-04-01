@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import UserService from "../services/user.service.js";
-// import UserService from "../services/user.mock.service.js";
+// import UserService from "../__mocks__/services/user.mock.service.js";
 import { CustomMessage, UserShape, HttpStatusCode } from "api-types";
 
 // TO DO -- when implementing front end, decide if it's worth moving the Response shapes into the shared API library
