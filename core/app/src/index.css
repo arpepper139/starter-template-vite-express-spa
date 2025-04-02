@@ -1,19 +1,4 @@
-@layer radix-colors, tokens, base-styles;
-
-/* Load Radix Colors in a separate layer */
-@layer radix-colors {
-  @import "@radix-ui/colors/gray.css";
-  @import "@radix-ui/colors/orange.css";
-  @import "@radix-ui/colors/green.css";
-  @import "@radix-ui/colors/yellow.css";
-  @import "@radix-ui/colors/red.css";
-
-  @import "@radix-ui/colors/gray-dark.css";
-  @import "@radix-ui/colors/orange-dark.css";
-  @import "@radix-ui/colors/green-dark.css";
-  @import "@radix-ui/colors/yellow-dark.css";
-  @import "@radix-ui/colors/red-dark.css";
-}
+@layer tokens, base-styles;
 
 /* Design system css tokens */
 @layer tokens {
@@ -25,13 +10,6 @@
     --primary-subtle: var(--orange-4);
     --primary-background: var(--orange-2);
     --primary-foreground: var(--orange-12);
-
-    --secondary-base: var(--gray-9);
-    --secondary-hover: var(--gray-10);
-    --secondary-active: var(--gray-11);
-    --secondary-subtle: var(--gray-4);
-    --secondary-background: var(--gray-2);
-    --secondary-foreground: var(--gray-12);
 
     --success-base: var(--green-9);
     --success-hover: var(--green-10);
@@ -54,7 +32,7 @@
     --danger-background: var(--red-2);
     --danger-foreground: var(--red-12);
 
-    --background: var(--gray-2);
+    --background: var(--gray-1);
     --foreground: var(--gray-12);
     --border: var(--gray-6);
 
@@ -85,21 +63,27 @@
 }
 
 @layer base-styles {
-  :root {
-    font-family: var(--font-family);
-    color-scheme: light dark auto;
+  html,
+  body,
+  #root {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
 
-    /* Prevents the browser from automatically synthesizing bold or italic versions of fonts if they are missing */
+  body {
+    font-family: var(--font-family);
+    background-color: var(--background);
+    color: var(--foreground);
     font-synthesis: none;
-    /* Improves text rendering by enabling kerning (spacing between letters) and ligatures (character combinations). */
     text-rendering: optimizeLegibility;
-    /* Helps make fonts appear smoother on WebKit-based browsers (Chrome, Safari). */
     -webkit-font-smoothing: antialiased;
-    /* Adjusts font smoothing on macOS Firefox, making text appear thinner and sharper. */
     -moz-osx-font-smoothing: grayscale;
   }
-}
 
-.background {
-  background-color: var(--background)
+  /* Remove default Link styles */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }

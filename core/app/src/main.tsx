@@ -1,14 +1,27 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "@radix-ui/colors/orange.css"; // Force Vite to include it
-import "@radix-ui/colors/gray.css";
-import "@radix-ui/colors/green.css";
-import "@radix-ui/colors/yellow.css";
-import "@radix-ui/colors/red.css";
-import "./index.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Link } from "react-router";
 
+// Import Radix Colors
+import "@radix-ui/colors/gray.css";
+import "@radix-ui/colors/gray-dark.css";
+import "@radix-ui/colors/orange.css";
+import "@radix-ui/colors/orange-dark.css";
+import "@radix-ui/colors/green.css";
+import "@radix-ui/colors/green-dark.css";
+import "@radix-ui/colors/yellow.css";
+import "@radix-ui/colors/yellow-dark.css";
+import "@radix-ui/colors/red.css";
+import "@radix-ui/colors/red-dark.css";
+
+// Import our styles
+import "./index.css";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router";
+import { ThemeProvider } from "./providers/ThemeProvider";
+import { Navigation } from "./layouts/Navigation";
+
+// Pages
 import { Home } from "./pages/Home";
 import { User } from "./pages/User";
 import { Users } from "./pages/Users";
@@ -18,21 +31,20 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <div className="dark">
-        <div className="background">
-          <BrowserRouter>
-            <Link to="/">Home</Link>
-            <Link to="/users">Users</Link>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Navigation />
+          <main style={{ padding: "1rem" }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/users" element={<Users />} />
               <Route path="/user/:userId" element={<User />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </BrowserRouter>
-        </div>
-      </div>
-    </QueryClientProvider>
+          </main>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ThemeProvider>
   </StrictMode>
 );
