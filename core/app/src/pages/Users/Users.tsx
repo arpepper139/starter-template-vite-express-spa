@@ -33,7 +33,7 @@ const UserCard = ({ user, onDelete }: UserCardProps) => {
           onClick={() => navigate(`/users/${user.id}`)}
           aria-label={`Edit user ${user.name}`}
         >
-          View User
+          Edit User
         </Button>
         <Button
           variant="secondary"
@@ -48,7 +48,7 @@ const UserCard = ({ user, onDelete }: UserCardProps) => {
   );
 };
 
-export const Users = () => {
+const UsersBase = () => {
   const { data: users, refetch } = useSuspenseQuery({
     queryKey: ["users"],
     queryFn: () => apiFetch<UserShape[]>("/api/users"),
@@ -70,7 +70,19 @@ export const Users = () => {
     }
   };
 
-  // TO DO -- consider placing error boundary in a place where it will catch errors within the component, not just render -- maybe at the route level?
+  return (
+    <div className={styles.container}>
+      <Heading level={2} className={styles.title}>
+        All Users
+      </Heading>
+      {users.map((user) => (
+        <UserCard key={user.id} user={user} onDelete={handleDelete} />
+      ))}
+    </div>
+  );
+};
+
+export const Users = () => {
   return (
     <ErrorBoundary
       fallback={<UsersErrorFallback />}
@@ -80,14 +92,7 @@ export const Users = () => {
       }}
     >
       <Suspense fallback={<UsersSuspenseFallback />}>
-        <div className={styles.container}>
-          <Heading level={2} className={styles.title}>
-            All Users
-          </Heading>
-          {users.map((user) => (
-            <UserCard key={user.id} user={user} onDelete={handleDelete} />
-          ))}
-        </div>
+        <UsersBase />
       </Suspense>
     </ErrorBoundary>
   );

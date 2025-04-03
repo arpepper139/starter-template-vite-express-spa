@@ -13,6 +13,8 @@ export interface FormField {
   label: string;
   /** HTML input type (e.g., 'text', 'email', 'password') */
   type?: string;
+  /** Initial value for the field */
+  initialValue?: string;
   /** If true, the field must be filled out */
   required?: boolean;
   /** Placeholder text shown when the field is empty */
@@ -61,7 +63,15 @@ export const Form: React.FC<FormProps> = ({
   heading,
   headingLevel = 6,
 }) => {
-  const [values, setValues] = React.useState<Record<string, string>>({});
+  const [values, setValues] = React.useState<Record<string, string>>(() => {
+    // Initialize values with initialValue if provided
+    return fields.reduce((acc, field) => {
+      if (field.initialValue) {
+        acc[field.name] = field.initialValue;
+      }
+      return acc;
+    }, {} as Record<string, string>);
+  });
   const [errors, setErrors] = React.useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submissionState, setSubmissionState] =
