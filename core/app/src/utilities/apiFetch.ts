@@ -53,7 +53,6 @@ export async function apiFetch<T>(endpoint: string, options: FetchOptions = {}):
             const errorData = await response.json();
             throw new Error(errorData.message || `Error ${response.status}`);
         }
-        console.log("in success", response);
 
         // Handle 204 No Content responses
         if (response.status === 204) {

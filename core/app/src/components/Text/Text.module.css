@@ -8,18 +8,18 @@
 /* Variants */
 .body {
   font-size: var(--font-size-md);
-  line-height: 1.5;
+  line-height: var(--line-height-md);
 }
 
 .caption {
   font-size: var(--font-size-sm);
-  line-height: 1.4;
+  line-height: var(--line-height-sm);
   color: var(--text-secondary);
 }
 
 .small {
   font-size: var(--font-size-sm);
-  line-height: 1.4;
+  line-height: var(--line-height-sm);
 }
 
 /* Text styles */
