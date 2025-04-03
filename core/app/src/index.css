@@ -10,6 +10,7 @@
     --primary-subtle: var(--orange-4);
     --primary-background: var(--orange-2);
     --primary-foreground: var(--orange-12);
+    --primary-light: var(--orange-3);
 
     --success-base: var(--green-9);
     --success-hover: var(--green-10);
@@ -32,18 +33,31 @@
     --danger-background: var(--red-2);
     --danger-foreground: var(--red-12);
 
+    --error: var(--danger-base);
+    --error-light: var(--danger-subtle);
+
     --background: var(--gray-1);
+    --background-disabled: var(--gray-3);
     --foreground: var(--gray-12);
     --border: var(--gray-6);
 
+    --text-primary: var(--gray-12);
+    --text-secondary: var(--gray-11);
+
     /* Typography */
     --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    
     --font-size-sm: 14px;
     --font-size-md: 16px;
     --font-size-lg: 18px;
+
     --font-weight-regular: 400;
     --font-weight-medium: 500;
     --font-weight-bold: 700;
+
+    --line-height-sm: 1.4;
+    --line-height-md: 1.5;
+    --line-height-lg: 1.6;
 
     /* Spacing */
     --spacing-sm: 8px;
@@ -69,6 +83,8 @@
     margin: 0;
     padding: 0;
     min-height: 100vh;
+    /* Box sizing reset - ensures padding and borders are included in element dimensions */
+    box-sizing: border-box;
   }
 
   body {

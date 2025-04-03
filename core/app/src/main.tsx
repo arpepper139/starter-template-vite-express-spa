@@ -39,7 +39,7 @@ createRoot(document.getElementById("root")!).render(
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/users" element={<Users />} />
-              <Route path="/user/:userId" element={<User />} />
+              <Route path="/users/:userId" element={<User />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

@@ -2,10 +2,21 @@ import { Button, ButtonSize } from "../Button/Button";
 import { useTheme } from "../../providers/ThemeProvider/ThemeProvider";
 import { Half2Icon } from "@radix-ui/react-icons";
 
+/** Props for the ThemeToggle component */
 interface ThemeToggleProps {
+  /** Size of the toggle button */
   size?: ButtonSize;
 }
 
+/**
+ * A button component that toggles between light and dark themes.
+ * Uses the ThemeProvider context to manage theme state.
+ *
+ * @example
+ * ```tsx
+ * <ThemeToggle size="small" />
+ * ```
+ */
 export const ThemeToggle = ({ size = "default" }: ThemeToggleProps) => {
   const { theme, setTheme } = useTheme();
 
