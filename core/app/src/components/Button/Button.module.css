@@ -46,17 +46,17 @@
 /* Secondary variant */
 .secondary {
   background-color: var(--background);
-  color: var(--foreground);
-  border: 1px solid var(--foreground);
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
 }
 
 .secondary:hover:not(:disabled) {
-  background-color: var(--foreground);
+  background-color: var(--text-primary);
   color: var(--background);
 }
 
 .secondary:active:not(:disabled) {
-  background-color: var(--foreground);
+  background-color: var(--text-primary);
   color: var(--background);
   opacity: 0.9;
 }
@@ -90,17 +90,20 @@
 }
 
 .text.secondary {
-  color: var(--secondary-base);
+  color: var(--text-primary);
+  border: none;
 }
 
 .text.secondary:hover:not(:disabled) {
-  color: var(--secondary-hover);
+  color: var(--text-primary);
   background-color: transparent;
+  opacity: 0.8;
 }
 
 .text.secondary:active:not(:disabled) {
-  color: var(--secondary-active);
+  color: var(--text-primary);
   background-color: transparent;
+  opacity: 0.6;
 }
 
 /* Size variants */

@@ -6,13 +6,29 @@ export type ButtonVariant = "primary" | "secondary";
 export type ButtonSize = "small" | "default" | "large";
 export type ButtonRadius = "default" | "circle";
 
+/** Props for the Button component */
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Visual style variant of the button */
   variant?: ButtonVariant;
+  /** Size of the button */
   size?: ButtonSize;
+  /** If true, the button will take up the full width of its container */
+  fullWidth?: boolean;
+  /** If true, the button will be disabled and not respond to user interaction */
+  disabled?: boolean;
+  /** Additional CSS class names */
+  className?: string;
+  /** HTML button type attribute */
+  type?: "button" | "submit" | "reset";
+  /** If true, shows a loading spinner and disables the button */
   isLoading?: boolean;
+  /** Icon to display on the left side of the button content */
   leftIcon?: React.ReactNode;
+  /** Icon to display on the right side of the button content */
   rightIcon?: React.ReactNode;
+  /** If true, renders the button as a text-only button without background or border */
   isText?: boolean;
+  /** Border radius style for the button */
   borderRadius?: ButtonRadius;
 }
 

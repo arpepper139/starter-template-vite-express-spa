@@ -1,0 +1,35 @@
+.container {
+  padding: var(--spacing-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  margin-bottom: var(--spacing-lg);
+}
+
+.card {
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  background-color: var(--background);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardContent {
+  flex: 1;
+}
+
+.email {
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-left: var(--spacing-md);
+}

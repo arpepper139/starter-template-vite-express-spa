@@ -49,8 +49,15 @@ export async function apiFetch<T>(endpoint: string, options: FetchOptions = {}):
         const response = await fetch(`${API_BASE_URL}${endpoint}`, fetchOptions);
 
         if (!response.ok) {
+            console.log("in error", response);
             const errorData = await response.json();
             throw new Error(errorData.message || `Error ${response.status}`);
+        }
+        console.log("in success", response);
+
+        // Handle 204 No Content responses
+        if (response.status === 204) {
+            return null as T;
         }
 
         return await response.json() satisfies T;
