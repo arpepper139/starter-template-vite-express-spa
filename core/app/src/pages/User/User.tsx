@@ -31,15 +31,18 @@ const UserBase = () => {
       }),
     onSuccess: (updatedUser) => {
       // Update the individual user query
-      queryClient.setQueryData(["user", userId], updatedUser);
-      
+      queryClient.setQueryData<UserShape>(["user", userId], updatedUser);
+
       // Update the users list in the cache
-      queryClient.setQueryData<UserShape[]>(["users"], (oldUsers) => {
-        if (!oldUsers) return [updatedUser];
-        return oldUsers.map((user) => 
-          user.id === userId ? updatedUser : user
-        );
-      });
+      queryClient.setQueryData<UserShape[]>(
+        ["users"],
+        (oldUsers: UserShape[] | undefined) => {
+          if (!oldUsers) return [updatedUser];
+          return oldUsers.map((user) =>
+            user.id === userId ? updatedUser : user
+          );
+        }
+      );
     },
   });
 
